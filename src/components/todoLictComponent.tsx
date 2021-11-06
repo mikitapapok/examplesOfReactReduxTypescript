@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from "react";
-import {useAppDispatch, useAppSelector} from "../redux/store";
-import {removeSomeTodo, switchState, toggleComplete} from "../redux/reducer";
+import {useAppDispatch} from "../redux/store";
+import {removeSomeTodo, switchState} from "../redux/reducer";
 
 interface IProps{
     userId: number|string,
@@ -21,10 +21,10 @@ const  TodoListComponent:React.FC=({children}:PropsWithChildren<any>)=>{
         dispatch(switchState(child.id))
     }
     return(
-        <div className={child.completed?'completed':'incompleted'}>
+        <div className={`list-component `}>
             <input type='checkbox'  onChange={toggleState} checked={child.completed?true:false}/>
-            <p>{child.title}</p>
-            <button onClick={removeItem}>delete Todo</button>
+            <p className={child.completed ? 'completed' : 'incompleted'}>{child.title}</p>
+            <button className='delete-button' onClick={removeItem}>delete Todo</button>
         </div>
     )
 }

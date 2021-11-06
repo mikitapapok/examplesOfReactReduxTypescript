@@ -1,19 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import {useAppDispatch, useAppSelector} from "../redux/store";
-import {createNewTodo, TodoItem} from "../redux/reducer";
+import React from 'react'
+import { useAppSelector} from "../redux/store";
 import TodoListComponent from "./todoLictComponent";
 
 const TodoList: React.FC=()=>{
-    const dispatch=useAppDispatch()
     const sort=useAppSelector(state=>state.todo.sort)
     const todos=useAppSelector(state=>state.todo.todos)
-    const [info,setInfo]=useState<Array<TodoItem>>([])
-    useEffect(()=>{
-       dispatch(createNewTodo())
-    },[dispatch])
-
     return(
-        <div>
+        <div className='list'>
             {todos?todos.filter(e=> {
                 if(sort==='all'){
                     return e

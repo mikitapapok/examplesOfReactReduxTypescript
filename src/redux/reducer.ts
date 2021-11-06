@@ -1,7 +1,7 @@
 import {
     createSlice,
     createAsyncThunk,
-    PayloadAction, isAsyncThunkAction, Dispatch, Action
+    PayloadAction
 } from "@reduxjs/toolkit";
 
 import {store} from "./store";
@@ -16,10 +16,9 @@ const currentHref:string='https://jsonplaceholder.typicode.com/todos?_limit=5'
 
 export const createNewTodo=createAsyncThunk(
     'todo/createNewTodo',
-    async function(_,{rejectWithValue}){
+    async function(_,{rejectWithValue,dispatch}){
         const response= await fetch(currentHref);
         const data:TodoItem[]=await response.json()
-        console.log(data)
         return data
     }
 )
@@ -72,21 +71,21 @@ export const addNewItem=createAsyncThunk<any,string,{state: ReturnType<typeof st
             },
             body: JSON.stringify(newItem)
         })
-        // const data=await resp.json()
+
         dispatch(addTodo(newItem))
 
     }
 )
-interface MyState{
-    todos: TodoItem[],
-    currentId:number,
+type MyState={
+    todos: TodoItem[]|string,
+    currentId:string|number,
     sort:string|boolean,
     status:string
 }
 const todosReducer=createSlice({
     name: 'todo',
     initialState:{
-        todos: [] as TodoItem[],
+        todos:  [] as TodoItem[],
         currentId: 547 as number,
         sort: 'all' as string|boolean,
         status:'' as string
@@ -124,7 +123,7 @@ const todosReducer=createSlice({
             state.status='load'
         },
         [createNewTodo.fulfilled.type]:(state:any,action:PayloadAction<any>)=>{
-            state.todos=action.payload
+            state.todos=[...state.todos,...action.payload]
 }
     }
 
