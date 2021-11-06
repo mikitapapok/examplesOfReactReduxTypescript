@@ -1,4 +1,4 @@
-#TodoList Project
+# TodoList Project
 This is a simple project I have made to figure out how the Redux Thunk works.
 ## Tools and Libraries
  In this project I used next tools and libraries:<br/>
