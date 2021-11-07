@@ -10,7 +10,7 @@ This is a simple project I have made to figure out how the Redux Thunk works.
 ## Usage
     You can create your own todo item adding text into input element.
     Also, you can get todo list from server, clicking 'get data from derver'
-    button. Todo list component you are able to delete, or change its status
+    button.  You are able to delete  component, or change its status
     clicking checkbox.
 ## Links
 [Source code](https://github.com/mikitapapok/examplesOfReactReduxTypescript/tree/toolkitType)
